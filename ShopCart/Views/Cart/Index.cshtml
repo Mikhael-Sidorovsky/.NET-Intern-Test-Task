@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ShopCart.Models.Cart>
+
+@{
+    ViewBag.Title = "Cart";
+}
+
+<h2>Cart</h2>
+
+@if (ViewBag.Message != null)
+{
+    <h3>@ViewBag.Message</h3>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                Name
+            </th>
+            <th>
+                Quantity
+            </th>
+            <th>
+                Price
+            </th>
+            <th>
+                Total
+            </th>
+            <th>
+                With discount
+            </th>
+            <th>&nbsp;</th>
+
+            <th>
+            </th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.NotebookName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Price)UAH
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total) UAH
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountToPay)
+        </td>
+        <td>
+            <a href="#" class="removeproduct" data-id="@item.NotebookId">Remove</a>
+        </td>
+
+    </tr>
+            
+        }
+    <tr>
+        <td><a href="~/Cart/ConfirmOrder" class="btn btn-success">Confirm order</a></td>
+        <td></td>
+        <td></td>
+        <td>@ViewBag.GrandTotal</td>
+        <td><b>To pay:</b> @ViewBag.ToPay</td>
+        <td></td>
+        <td></td>
+    </tr>
+
+    </table>
+}
+
+@section Scripts {
+    <script>
+        $(function () {
+
+            $("a.removeproduct").click(function (e) {
+                e.preventDefault();
+
+                var $this = $(this);
+                var productId = $(this).data("id");
+                var url = "/cart/RemoveProduct";
+
+                $.get(url, { productId: productId }, function (data) {
+                    location.reload();
+                });
+            });
+        });
+    </script>
+}

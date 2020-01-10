@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewBag.Title = "Confirm Order";
+}
+
+<h2>Confirm Order</h2>
+
+
+
+<form method="post" action="">
+    <table>
+        <tbody>
+            <tr>
+                <td style="padding:10px">Address</td>
+                <td style="padding:10px"><input type="text" name="@ViewBag.DeliveryAddress" /></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="padding:10px"><a href="~/Cart/SendOrder/@ViewBag.DeliveryAddress" class="btn btn-success">Confirm</a></td>
+            </tr>
+        </tbody>
+    </table>
+</form>
+
